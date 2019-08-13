@@ -3,7 +3,8 @@ module.exports = {
     description: '',
     usage: '',
     execute(message, args) {
-        if(args === 'count'){
+        if(args[0] === 'count'){
+            console.log(message.guild.members);
             return message.reply(`member count: ${message.guild.memberCount}`);
         }
     },
