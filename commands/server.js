@@ -4,8 +4,17 @@ module.exports = {
     usage: '',
     execute(message, args) {
         if(args[0] === 'count'){
-            console.log(message.guild.members);
-            return message.reply(`member count: ${message.guild.memberCount}`);
+            var bots = 0;
+            var users = 0;
+            message.guild.members.forEach(member => {
+                if(member.bot)
+                    bots++;
+                else
+                    users++;
+            });
+
+
+            return message.reply(`member count:\n${users} users\n${bots} bots`);
         }
     },
 }
