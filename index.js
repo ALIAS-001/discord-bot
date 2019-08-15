@@ -14,7 +14,7 @@ for(const file of commandFiles){
 }
 client.once('ready', () =>{
     // what username this bot is registered as
-    console.log(`connected as ${client.user.username}`)
+    console.log(`Connected as ${client.user.username}`)
     //all servers connected to
     console.log('Connected to:');
     client.guilds.forEach((guild) => {

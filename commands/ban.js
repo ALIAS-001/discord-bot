@@ -29,10 +29,14 @@ module.exports = {
                     const res = ['Yes', 'yes', 'Y', 'y'];
                     message.channel.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
                         .then(message => {
+                            console.log(message.first().content);
                             console.log(res.some(y => y === message.content))
-                            if(res.some(y => y === message.content)){
-                                message.guild.ban(user,reasonb);
-                                console.log(`banned ${user} for ${day} days.`)
+                            if(res.some(y => y === message.first().content)){
+                                message.guild.ban(user,reasonb).catch(err =>
+                                    console.log(err),
+                                    message.reply(`Sorry, I was unable to ban ${user}`)
+                                );
+                                console.log(`banned ${user} for ${day} days.`);
                                 message.reply(`banned ${user} for ${day} days.`);
                             }
                         })
