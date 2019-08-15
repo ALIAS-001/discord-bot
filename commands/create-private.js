@@ -9,13 +9,9 @@ module.exports = {
                 channelsName.push(channel.name);
             }
         });
-        console.log(channelsName);
-        console.log(message.author.username);
         if(channelsName.some(name => name === message.author.username.toLowerCase())){
-            return message.reply(`Sorry @${message.author.tag}, you already have a channel for yourself\n**Don't be greedy**`);
-        }
-        
-
+            return message.reply(`Sorry, you already have a channel for yourself\n**Don't be greedy**`);
+        }  
         /*
         //for every server
         client.guilds.forEach((guild) => {
@@ -26,7 +22,6 @@ module.exports = {
             })
         });
         */
-        
         //create private server for user
         message.guild.createChannel(message.author.username, 'text', [
             {

@@ -15,6 +15,9 @@ module.exports = {
 
             return message.reply(`server count:\n${users} users\n${bots} bots`);
         }
+        else if(args[0] === 'info'){
+            console.log(message.guild);
+        }
     },
-    
+
 }
