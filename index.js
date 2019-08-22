@@ -35,13 +35,15 @@ client.on('message', message=> {
     if(command.guildOnly && message.channel.type !== 'text') 
         return message.reply('I can\'t execute that command in here');
     
-    if (command.args && !args.length){
+    if (command.args && !args.length/* || args.length !== command.argsnum*/ ){
         let reply = `You didn't provide any arguments, ${message.author}`
         if (command.usage) {
             reply += `\nThe proper usage is, \`${prefix}${commandName} ${command.usage}\``;
         }
         return message.channel.send(reply);
     }
+    if (command.disable)
+        return message.channel.send(`The command **${command.name}** has been disabled`);
     //cooldown here
 
     try{

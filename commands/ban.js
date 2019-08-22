@@ -2,7 +2,9 @@ const min_role = 'owner';
 module.exports = {
     name: 'ban',
     description: 'ban someone (only certant roles can use this command)',
+    disable: true,
     args: true,
+    argsnum: 2,
     usage: '<@user> <days> [reason] or <days> <@user> [reason]',
     execute(message, args){
         if(message.member.roles.some(role => role.name === min_role)){
@@ -29,9 +31,9 @@ module.exports = {
                     const res = ['Yes', 'yes', 'Y', 'y'];
                     message.channel.awaitMessages(filter, { time: 60000, maxMatches: 1, errors: ['time'] })
                         .then(message => {
-                            console.log(message.first().content);
-                            console.log(res.some(y => y === message.content))
+                            console.log(res.some(y => y === message.first().content));
                             if(res.some(y => y === message.first().content)){
+                                console.log('banning')
                                 message.guild.ban(user,reasonb).catch(err =>
                                     console.log(err),
                                     message.reply(`Sorry, I was unable to ban ${user}`)
@@ -40,8 +42,9 @@ module.exports = {
                                 message.reply(`banned ${user} for ${day} days.`);
                             }
                         })
-                        .catch(() => {
+                        .catch(err => {
                             message.reply('Ok, never mind.')
+                            console.log(err);
                         }
                     )
                 }
